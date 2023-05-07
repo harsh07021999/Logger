@@ -9,5 +9,5 @@ class Consumer:
         for msg in self.log_consumer:
             print(msg)
 
-s = Consumer('error')
+s = Consumer('info')
 s.show_msg()

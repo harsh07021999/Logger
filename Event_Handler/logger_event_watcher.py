@@ -26,6 +26,7 @@ class Handler(FileSystemEventHandler):
     @staticmethod
     def on_any_event(event):
         log_producer  = producer.Producer()
+        print(event.src_path)
         if event.is_directory:
             return None
   
@@ -39,5 +40,6 @@ class Handler(FileSystemEventHandler):
         elif event.event_type == 'modified':
             print("Received modified event - % s." % event.src_path)
             msg = "Received modified event - % s." % event.src_path
-            topic = event.src_path.replace(os.path.dirname(os.path.abspath('.')),'').split('/')[3]
+            print(event.src_path.replace(os.path.dirname(os.path.abspath('.')),'').split('\\'))
+            topic = event.src_path.replace(os.path.dirname(os.path.abspath('.')),'').split('\\')[2]
             log_producer.send_msg(topic,msg)
